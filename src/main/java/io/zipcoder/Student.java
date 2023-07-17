@@ -31,31 +31,40 @@ public class Student {
         return examScore.size();
     }
 
-    public String getExamScore () {
-        StringBuilder examScor = new StringBuilder();
-        for (int i = 0; i < this.examScore.size(); i++) {
-            double roundInt = this.examScore.get(Math.round(i));
-            examScor.append("   Exam " + (i + 1) + " -> " + (int)roundInt  + " \n ");
+
+    public String getExamScore() {
+        StringBuilder examScoreBuilder = new StringBuilder();
+
+        for (int i = 0; i < examScore.size(); i++) {
+            double round = Math.round(examScore.get(i));
+
+            examScoreBuilder.append(String.format(" Exam %d -> %d%n", i + 1, (int) round));
         }
 
-
-        return " Exam Scores: \n  " + examScor;
+        return " Exam Scores: \n" + examScoreBuilder;
     }
+
+
+
     public void addExamScore (int examNumber , double newScore) {
-        this.examScore.set(examNumber,newScore);
+
+        this.examScore.add(examNumber,newScore);
     }
 
     public double getAverageExamScoreOfStudent () {
-        double sum = 0.0 ;
-        for (int i = 0 ; i < this.examScore.size() ;i++ ) {
-            sum += this.examScore.get(i);
+        double sum = 0.0;
+        for (int i = 0; i < examScore.size(); i++ ) {
+            sum += examScore.get(i);
         }
         return sum / examScore.size();
     }
 
     public void setExamScore(int examNumber, double newScore) {
-        if (examNumber >= 1 && examNumber <= examScore.size()) {
-            examScore.set(examNumber - 1, newScore );
+
+        for (int i = 0 ; i < examScore.size() ; i++) {
+        if ( examScore.get(i).equals((double)examNumber)) {
+            examScore.set(i,newScore);
+            }
         }
     }
 

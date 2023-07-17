@@ -1,4 +1,6 @@
 package io.zipcoder;
+import org.junit.Assert;
+
 import java.util.Comparator;
 
 import java.util.*;
@@ -8,10 +10,12 @@ public class Classroom {
 
 
     public Classroom( int maxNumberOfStudent) {
+
         this.students = new Student[maxNumberOfStudent];
     }
 
     public Classroom(Student [] students) {
+
         this.students = students;
     }
 
@@ -22,63 +26,62 @@ public class Classroom {
     }
 
     public Student[] getStudents () {
+
         return students;
     }
 
     public Double getAverageExamScore () {
 
-        Double sum = 0.0;
-
-        for (int i = 0 ; i <  this.students.length ; i++ ) {
+        double sum = 0.0 ;
+        for (int i = 0 ; i < students.length ; i++) {
             sum += students[i].getAverageExamScoreOfStudent();
-
         }
-        return  sum / this.students.length;
+        return sum / students.length;
     }
 
     public void addStudent (Student student) {
-        Student[] arrOfStudents = new Student[students.length + 1 ];
-        for (int i = 0 ; i < students.length; i++) {
-            arrOfStudents[i] = students[i];
+        Student [] arr = new Student[students.length + 1];
+
+        for (int i = 0 ; i < students.length ; i++) {
+            arr[i] = students[i];
         }
-        arrOfStudents[students.length] = student;
-        students = arrOfStudents;
+        arr[students.length] = student;
+        students = arr;
     }
 
 
     public void removeStudent(String firsName , String lastName) {
-        ArrayList<Student> arrOfStudent = new ArrayList<>(students.length);
+        ArrayList<Student> arrOfStudents = new ArrayList<>(students.length);
 
-        for (int i = 0; i < arrOfStudent.size(); i++) {
-
-            Student student = arrOfStudent.get(i);
-            String stName = student.getStudentName();
-            String slastName = student.getLastName();
-            {
-                if (stName.equals(firsName) && slastName.equals(lastName)) {
-                    arrOfStudent.remove(student);
-                }
+        for (int i = 0 ; i < arrOfStudents.size() ; i++) {
+            Student student = arrOfStudents.get(i);
+            String stname = student.getStudentName();
+            String stlastname = student.getLastName();
+            if (stname.equals(firsName) && stlastname.equals(lastName)) {
+                arrOfStudents.remove(i);
             }
-            arrOfStudent.add(null);
+            arrOfStudents.add(null);
         }
-        students = arrOfStudent.toArray(new Student[0]);
     }
 
     public Student[] getStudentsByScore() {
-        ArrayList<Student> sortedStudents = new ArrayList<>(Arrays.asList(students));
+        ArrayList <Student> arrOfStudents = new ArrayList<>(Arrays.asList(students));
 
-        Collections.sort(sortedStudents, new Comparator<Student>() {
-            public int compare(Student s1, Student s2) {
-                int scoreComparison = Double.compare(s2.getAverageExamScoreOfStudent(), s1.getAverageExamScoreOfStudent());
-                if (scoreComparison != 0) {
-                    return scoreComparison;
-                } else {
+        Collections.sort(arrOfStudents, new Comparator<Student>() {
+            public int compare (Student s1 ,Student s2) {
+                int scoreCompration = Double.compare(s2.getAverageExamScoreOfStudent(),s1.getAverageExamScoreOfStudent());
+                if (scoreCompration != 0) {
+                    return scoreCompration;
+                }
+                else {
                     return s1.getLastName().compareTo(s2.getLastName());
                 }
             }
         });
-
-        return sortedStudents.toArray(new Student[0]);
+        return arrOfStudents.toArray(new Student[0]);
     }
 
-}
+
+
+
+    }
