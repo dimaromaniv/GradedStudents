@@ -32,16 +32,17 @@ public class Student {
     }
 
 
+
     public String getExamScore() {
         StringBuilder examScoreBuilder = new StringBuilder();
-
+            examScoreBuilder.append("Exam Scores:\n");
         for (int i = 0; i < examScore.size(); i++) {
-            double round = Math.round(examScore.get(i));
+//            double round = Math.round(examScore.get(i));
 
-            examScoreBuilder.append(String.format(" Exam %d -> %d%n", i + 1, (int) round));
+            examScoreBuilder.append(String.format("\tExam %d -> %.2f\n", i + 1, examScore.get(i)));
         }
 
-        return " Exam Scores: \n" + examScoreBuilder;
+        return  examScoreBuilder.toString();
     }
 
 
@@ -59,13 +60,9 @@ public class Student {
         return sum / examScore.size();
     }
 
-    public void setExamScore(int examNumber, double newScore) {
+    public Double setExamScore(int examNumber, double newScore) {
+        return examScore.set(examNumber - 1,newScore );
 
-        for (int i = 0 ; i < examScore.size() ; i++) {
-        if ( examScore.get(i).equals((double)examNumber)) {
-            examScore.set(i,newScore);
-            }
-        }
     }
 
 

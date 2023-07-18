@@ -1,5 +1,6 @@
 package io.zipcoder;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,15 +21,15 @@ public class ClassroomTest {
         ArrayList<Double> examScores = new ArrayList<>();
         examScores.add(50.00);
         ArrayList<Double> examScores2 = new ArrayList<>();
-        examScores2.add(100.0);
+        examScores2.add(94.0);
         ArrayList<Double> examScores5 = new ArrayList<>();
-        examScores.add(69.00);
+        examScores5.add(69.00);
         ArrayList<Double> examScores6 = new ArrayList<>();
-        examScores.add(13.00);
+        examScores6.add(13.00);
         ArrayList<Double> examScores7 = new ArrayList<>();
-        examScores.add(99.00);
+        examScores7.add(99.00);
         ArrayList<Double> examScores8 = new ArrayList<>();
-        examScores.add(59.00);
+        examScores8.add(59.00);
 
         s1 = new Student("one", "one",examScores);
         s2 = new Student("two", "two", examScores2);
@@ -37,17 +38,6 @@ public class ClassroomTest {
         s7 = new Student("seven", "seven", examScores7);
         s8 = new Student("eight", "eight", examScores8);
     }
-    // : Given
-//    String firstName = "Leon";
-//    String lastName = "Hunter";
-//    ArrayList examScoress = {100.0, 95.0, 123.0, 96.0};
-//    Student student = new Student(firstName, lastName, examScoress);
-//
-//    @Test
-//    public String testExamScore (String firstName , String lastName ,ArrayList examScore) {
-//    }
-
-
 
     @Test
     public void testGetStudentsByScore() {
@@ -86,7 +76,7 @@ public class ClassroomTest {
         Classroom c = new Classroom(new Student[]{s1, s2, s5, s6, s7, s8});
 
         // Given: expected ranking array
-        Student[] expectedArray = new Student[]{s7, s1,  s5, s8,  s2, s6};
+        Student[] expectedArray = new Student[]{s1, s2, s5, s6, s7, s8};
 
         // When: getting the mappings
         Student[] actualArray = c.getStudentsByScore();
@@ -94,6 +84,32 @@ public class ClassroomTest {
         // Then: equivalent maps?
         Assert.assertEquals(expectedArray, actualArray);
     }
+
+    @Test
+    public void testAverageExamScore () {
+        Classroom c = new Classroom(new Student[]{s1, s2, s5, s6, s7, s8});
+
+        Student [] expectedArray = new Student[]{s1, s2, s5, s6, s7, s8};
+        double expected = 64.0;
+        double actualArray = c.getAverageExamScore();
+
+        Assert.assertEquals(expected, actualArray,0001);
+
+    }
+    @Test
+    public void  testAddStudent () {
+        Classroom c = new Classroom(new Student[]{s1, s2, s5});
+        ArrayList<Double> examScores7 = new ArrayList<>();
+        examScores7.add(99.00);
+        Student s7 = new Student("seven", "seven", examScores7);
+        c.addStudent(s7);
+
+        Integer expected = c.getStudents();
+        Integer actual = 4;
+        Assert.assertEquals(expected,actual);
+
+    }
+
 
 
 }

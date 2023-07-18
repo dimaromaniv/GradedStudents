@@ -1,5 +1,4 @@
 package io.zipcoder;
-import org.junit.Assert;
 
 import java.util.Comparator;
 
@@ -25,18 +24,18 @@ public class Classroom {
 
     }
 
-    public Student[] getStudents () {
+    public int getStudents () {
 
-        return students;
+        return students.length;
     }
 
-    public Double getAverageExamScore () {
+    public double getAverageExamScore () {
 
         double sum = 0.0 ;
         for (int i = 0 ; i < students.length ; i++) {
             sum += students[i].getAverageExamScoreOfStudent();
         }
-        return sum / students.length;
+        return (double) sum / students.length;
     }
 
     public void addStudent (Student student) {
@@ -81,6 +80,12 @@ public class Classroom {
         return arrOfStudents.toArray(new Student[0]);
     }
 
+
+    public void clear(){
+        List newStudents = new ArrayList<>(Arrays.asList(students));
+        newStudents.clear();
+        newStudents.toArray(new Student[0]);
+    }
 
 
 

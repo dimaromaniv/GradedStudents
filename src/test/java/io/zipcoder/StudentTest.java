@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class StudentTest {
 
@@ -14,10 +15,10 @@ public class StudentTest {
    // private ArrayList<Double> arrayList ;
     @Before
     public void setUp() {
-        ArrayList<Double> arrayList = new ArrayList<>();
+        ;ArrayList<Double> arrayList = new ArrayList<>();
         arrayList.addAll(Arrays.asList(100.0, 50.0, 25.0));
         ArrayList<Double> arrayList2 = new ArrayList<>();
-        arrayList.addAll(Arrays.asList(15.0, 30.0, 45.0));
+        arrayList2.addAll(Arrays.asList(15.0, 30.0, 45.0));
 
         s1 = new Student("name1","lastName1",arrayList);
         s2 = new Student("name2","lastName2",arrayList2);
@@ -25,7 +26,7 @@ public class StudentTest {
 
     @Test
 
-    public void testFirstName ()  {
+    public void testSetFirstName ()  {
 
         String exeptedFirstName = "name";
 
@@ -35,8 +36,16 @@ public class StudentTest {
 
         Assert.assertEquals(exeptedFirstName,actualFirstName);
     }
+
     @Test
-    public void testLastName () {
+    public void testGetFirstName () {
+        String expectedFitstName = "thisName";
+        s1.setFirstName(expectedFitstName);
+        Assert.assertEquals(expectedFitstName,s1.getStudentName());
+
+    }
+    @Test
+    public void testSetLastName () {
         String expected = "lastName1";
 
         s1.setFirstName(expected);
@@ -44,6 +53,107 @@ public class StudentTest {
         String actual = s1.getLastName();
         Assert.assertEquals(expected,actual);
     }
+
+    @Test
+    public void testGetLastName () {
+
+        String expected = "lastName1";
+
+        s1.setFirstName(expected);
+        Assert.assertEquals(expected,s1.getLastName());
+
+    }
+    @Test
+    public void testAddExamScore (){
+        ArrayList arrgetScore = new ArrayList<>();
+        arrgetScore.add(33.3);
+        arrgetScore.add(44.5);
+
+        Student st3 = new Student("StudentA", "LastNameB",arrgetScore);
+
+        st3.addExamScore(2,55.0);
+        double expectedScore = 55.0;
+        double actualScore = st3.examScore.get(3-1); // Assuming index 3 corresponds to exam number 4
+        Assert.assertEquals(expectedScore, actualScore, 0.001);
+
+    }
+
+    @Test
+
+    public void  testAddExamScore3 () {
+        ArrayList<Double> examScores = new ArrayList<>();
+        examScores.add(9.01);
+        examScores.add(13.00);
+        Student student1 = new Student("StudentA", "LastNameB", examScores);
+
+        examScores.add(33.33);
+
+        Double expected = 55.33;
+        examScores.add(expected);
+        Double actual = student1.setExamScore(5-1,expected);
+        Assert.assertEquals(expected,actual);
+
+    }
+
+    @Test
+    public void testGetExamScores1() {
+        // Given: no expected exam scores and regular Student
+
+        ArrayList<Double> examScores = new ArrayList<>();
+        Student student = new Student("StudentA", "LastNameB", examScores);
+        String noTestScores = " Exam Scores:\n ";
+
+        // When: get exam scores of Student
+        String actualExamScores = student.getExamScore();
+
+        // Then: got no scores but the strings equal!
+        Assert.assertEquals(noTestScores, actualExamScores);
+    }
+
+    @Test
+    public void testAverageExamScoreOfStudent () {
+
+        Double expected = s1.getAverageExamScoreOfStudent();
+        Double actual = 58.333333333333336;
+        Assert.assertEquals(expected,actual);
+
+    }
+
+
+    @Test
+    public void  testSetExamScore (){
+
+
+        ArrayList<Double> examScores = new ArrayList<>();
+        examScores.add(9.01);
+        examScores.add(13.00);
+        Student student1 = new Student("StudentA", "LastNameB", examScores);
+
+        String expected = "Exam Scores:\n\tExam 1 -> 9.01\n\tExam 2 -> 13.00\n";
+        String actual = student1.getExamScore();
+        Assert.assertEquals(expected,actual);
+    }
+
+
+    @Test
+    public void testGetNumberOfExamTaken () {
+
+        ArrayList<Double> examScores = new ArrayList<>();
+        examScores.add(9.01);
+        examScores.add(13.00);
+        examScores.add(33.33);
+
+        Student student1 = new Student("StudentA", "LastNameB", examScores);
+
+        Integer expected = 3 ;
+
+        Integer actual = student1.getNumberOfExamTaken();
+        Assert.assertEquals(expected,actual);
+
+    }
+
+
+
 
 
 //    @Test
@@ -60,35 +170,7 @@ public class StudentTest {
 
 
 
-    @Test
-    public void testAddExamScore (){
-        Classroom classroom = new Classroom();
-        ArrayList expected = null;
-        expected.add(0,s1);
-        expected.add(1,s2);
-        Student[] newArrayLIst = classroom.getStudents();
-        Assert.assertEquals(expected,newArrayLIst);
 
-    }
-
-    @Test
-    public void testAverageExamScoreOfStudent () {
-
-        Double expected = s1.getAverageExamScoreOfStudent();
-        Double actual = 58.333333333333336;
-        Assert.assertEquals(expected,actual);
-
-    }
-
-    @Test
-    public void testAddtExamScore (){
-        //s1.addExamScore(4,55.0);
-       // Assert.assertEquals(s1.getExamScore(),s1.setExamScore(4,55.0);;
-        s1.setExamScore(3, 55.0);
-        double expectedScore = 55.0;
-        double actualScore = s1.examScore.get(3); // Assuming index 3 corresponds to exam number 4
-        Assert.assertEquals(expectedScore, actualScore, 0.001);
-    }
 
 
     @Test
